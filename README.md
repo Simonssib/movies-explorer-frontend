@@ -1,3 +1,6 @@
+# Links
+Figma maket: https://www.figma.com/file/lTKVAxilYW0hwhxQwKetQ8/Diploma-AlexeevSI?node-id=22300%3A1883&t=1uVURdNh3l609vmW-0
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
