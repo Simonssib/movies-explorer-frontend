@@ -6,7 +6,6 @@
     margin-top: 70px;
     margin-left: 70px;
     margin-right: 70px;
-    overflow-x: hidden;
 }
 
 .search-form__container {
@@ -18,8 +17,9 @@
     max-width: 1140px;
     width: 100%;
     border-radius: 8px;
+    margin: 0;
     margin-bottom: 26px;
-    
+    box-sizing: border-box;
 }
 
 .search-form__button {

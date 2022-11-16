@@ -1,13 +1,13 @@
 import React from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import SavedMoviesCardList from "./SavedMovieCardList/SavedMovieCardList";
 import "./savedMovies.css";
 
 function SavedMovies() {
     return (
         <main className='saved-movies'>
             <SearchForm />
-            <MoviesCardList />
+            <SavedMoviesCardList />
         </main>
     );
 };

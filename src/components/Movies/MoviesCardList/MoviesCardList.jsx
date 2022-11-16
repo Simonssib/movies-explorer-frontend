@@ -5,15 +5,42 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList() {
     return (
         <section className='movies-card-list'>
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
-            <MoviesCard />
+            <MoviesCard
+                name="save_active"
+                title=""
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
+            <MoviesCard
+                name="save_active"
+                title=""
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
+            <MoviesCard
+                name="save"
+                title="Сохранить"
+            />
         </section>
     );
 };

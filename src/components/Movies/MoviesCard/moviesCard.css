@@ -46,7 +46,7 @@
     width: 100px;
     height: 29px;
     border-radius: 30px;
-    font-size: 12;
+    font-size: 12px;
     font-weight: 400;
     background-color: rgba(249, 249, 249, 1);
     border: none;
@@ -54,16 +54,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-};
+}
 
 .movie-card__save_active {
     width: 100px;
     height: 29px;
     border-radius: 30px;
+    background-image: url(../../../images/suffix.svg);
+    background-repeat: no-repeat;
+    background-position: center;
     background-color: rgba(255, 64, 98, 1);
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    margin: 18px auto 18px auto;
+}
+
+.movie-card__delete-cross {
+    width: 100px;
+    height: 29px;
+    border-radius: 30px;
+    background-color: rgba(249, 249, 249, 1);
+    border: none;
+    margin: 18px auto 18px auto;
+    background-image: url(../../../images/cross.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
 }
 
 @media screen and (max-width: 768px) {

@@ -2,7 +2,7 @@ import React from 'react';
 import './moviesCard.css';
 import benksi from '../../../images/benksi.jpg';
 
-function MoviesCard() {
+function MoviesCard({ name, title }) {
 
     return (
         <section className="movie-card">
@@ -16,8 +16,8 @@ function MoviesCard() {
             </header>
             <img className='movie-card__image' alt='постер фильма' src={benksi} />
             <footer className="movie-card__footer">
-                <button className='movie-card__save'>
-                    Сохранить
+                <button className={`movie-card__${name}`} type='button'>
+                    {title}
                 </button>
             </footer>
         </section>

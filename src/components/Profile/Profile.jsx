@@ -33,7 +33,7 @@ function Profile() {
                 </label>
             </fieldset>
             <nav className="profile__navigation">
-                <button className='profile__edit'>
+                <button className='profile__edit' type="button">
                     Редактировать
                 </button>
                 <Link className="profile__logout" to="/">

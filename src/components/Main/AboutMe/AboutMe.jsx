@@ -10,7 +10,7 @@ function AboutMe() {
                 <address className="about-me__block">
                     <h3 className="about-me__author-name">Симон</h3>
                     <p className="about-me__author-about">
-                        Начинающий фронтенд-разработчик, 38 лет
+                        Начинающий фронтенд-разработчик, 26 лет
                     </p>
                     <p className="about-me__author-description">
                         В конце 2021 года я узнал, что такое разработка веб-сайта и начал интересоваться фронтенд-разработкой. Сейчас я заканчиваю 
@@ -18,7 +18,7 @@ function AboutMe() {
                     </p>
                     <a
                         className="about-me__author-link"
-                        href="https://github.com/cactys"
+                        href="https://github.com/simonssib"
                         target="blanck"
                     >
                         Github
