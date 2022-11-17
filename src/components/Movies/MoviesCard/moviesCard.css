@@ -1,6 +1,5 @@
 .movie-card {
     box-sizing: border-box;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     width: 360px;
@@ -101,7 +100,7 @@
     }
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 400px) {
     .movie-card {
         width: 300px;
         height: 271px;
