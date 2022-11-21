@@ -2,7 +2,7 @@
 Репозиторий для фронтенда приложения проекта `Movies Explorer`.
 
 Доменное имя проекта `Movies Explorer`:
-https://api.simonmovie.nomoredomains.icu
+https://simonmovie.nomoredomains.icu
 
 Ссылка на pull request:
 https://github.com/Simonssib/movies-explorer-frontend/pull/2
