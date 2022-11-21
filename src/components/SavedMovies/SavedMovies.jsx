@@ -1,13 +1,27 @@
 import React from "react";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import SavedMoviesCardList from "./SavedMovieCardList/SavedMovieCardList";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
+import Preloader from "../Movies/Preloader/Preloader";
 import "./savedMovies.css";
 
-function SavedMovies() {
+function SavedMovies({ onSearch, onSubmitCheckbox, onSaveMovie, onDeleteMovie, savedMovies, preloaderStatus }) {
+
     return (
         <main className='saved-movies'>
-            <SearchForm />
-            <SavedMoviesCardList />
+            <SearchForm
+                onSearch={onSearch}
+                onSubmitCheckbox={onSubmitCheckbox}
+            />
+            {preloaderStatus ? (
+                <Preloader />
+            ) : (
+                <MoviesCardList
+                    foundMovies={savedMovies}
+                    onSaveMovie={onSaveMovie}
+                    onDeleteMovie={onDeleteMovie}
+                    savedMovies={savedMovies}
+                />
+            )}
         </main>
     );
 };

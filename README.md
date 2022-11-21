@@ -1,4 +1,11 @@
-# Links
+# Информация по проекту
+Репозиторий для фронтенда приложения проекта `Movies Explorer`.
+
+Доменное имя проекта `Movies Explorer`:
+https://api.simonmovie.nomoredomains.icu
+
+Ссылка на pull request:
+
 Figma maket: https://www.figma.com/file/lTKVAxilYW0hwhxQwKetQ8/Diploma-AlexeevSI?node-id=22300%3A1883&t=1uVURdNh3l609vmW-0
 
 # Getting Started with Create React App

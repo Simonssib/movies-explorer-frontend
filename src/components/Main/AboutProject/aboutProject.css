@@ -177,7 +177,7 @@
   }
 
 
-  
+
   .about-project__backend {
     max-width: 100px;
     height: 35px;
@@ -205,4 +205,6 @@
     font-size: 11px;
     line-height: 13px;
   }
-};
+}
+
+;

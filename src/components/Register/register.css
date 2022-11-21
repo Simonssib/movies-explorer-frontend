@@ -26,12 +26,13 @@
     font-size: 24px;
     line-height: 29px;
     margin: 0;
+    margin-bottom: 24px;
 }
 
 .register__field {
     font-size: 10px;
     line-height: 12px;
-    margin: 50px auto 0 0;
+    margin: 26px auto 0 0;
     color: rgba(160, 160, 160, 1);
 }
 
@@ -43,6 +44,20 @@
     border: none;
     border-bottom: 1px solid rgba(232, 232, 232, 1);
     padding: 5px 0 10px 0;
+}
+
+.register__input_error {
+    color: red;
+}
+
+.register__form-error {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    margin-top: 10px;
+    max-width: 396px;
+    min-height: 24px;
 }
 
 .register__btn {
@@ -62,6 +77,12 @@
     outline: none;
     align-content: center;
     margin: 152px auto 0 auto;
+}
+
+.register__btn_disabled {
+    color: #C2C2C2;
+    background-color: #F8F8F8;
+    cursor: default;
 }
 
 .register__login {
@@ -86,7 +107,7 @@
     .register__logo {
         margin-top: 232px;
     }
-    
+
 }
 
 @media screen and (max-width: 320px) {
@@ -94,6 +115,7 @@
         width: 260px;
         align-items: center;
     }
+
     .register__logo {
         margin-top: 56px;
     }
@@ -102,19 +124,24 @@
         font-weight: 500;
         text-align: center;
     }
+
     .register__field:first-of-type {
         margin: 80px auto 0 0;
     }
+
     .register__field {
         margin: 24px auto 0 0;
     }
+
     .register__form {
         width: 260px;
         padding-top: 50px;
     }
+
     .register__input {
         width: 260px;
     }
+
     .register__btn {
         margin: 222px auto 0 auto;
         font-size: 12px;
@@ -123,7 +150,7 @@
     .register__article {
         font-size: 12px;
     }
-    
+
     .register__login-link {
         font-size: 12px;
     }

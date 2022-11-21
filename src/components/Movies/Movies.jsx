@@ -1,15 +1,27 @@
 import React from "react";
 import './Movies.css';
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import LoadMore from "./LoadMore/LoadMore";
 import SearchForm from "./SearchForm/SearchForm";
+import Preloader from "./Preloader/Preloader";
 
-function Movies() {
+function Movies({ onSearch, foundMovies, savedMovies, onSaveMovie, onDeleteMovie, onSubmitCheckbox, preloaderStatus }) {
+
     return (
         <main className="movies">
-            <SearchForm/>
-            <MoviesCardList/>
-            <LoadMore/>
+            <SearchForm
+                onSearch={onSearch}
+                onSubmitCheckbox={onSubmitCheckbox}
+            />
+            {preloaderStatus ? (
+                <Preloader />
+            ) : (
+                <MoviesCardList
+                    foundMovies={foundMovies}
+                    onSaveMovie={onSaveMovie}
+                    onDeleteMovie={onDeleteMovie}
+                    savedMovies={savedMovies}
+                />
+            )}
         </main>
     )
 };
