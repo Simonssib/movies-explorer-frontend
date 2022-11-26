@@ -100,6 +100,28 @@ function App() {
       })
   };
 
+  const handleLogOut = () => {
+    localStorage.clear();
+    setLoggedIn(false);
+    setCurrentUser({ name: "", email: "", _id: "" });
+  }
+
+  const handleUpdateUser = ({ name, email }) => {
+    mainApi
+      .editUserInfo({ name, email })
+      .then((user) => {
+        setCurrentUser({
+          name: user.name,
+          email: user.email
+        });
+        alert('Данные пользователя успешно редактированы');
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Ошибка редактирования');
+      });
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
@@ -122,6 +144,8 @@ function App() {
             path="/me"
             component={Profile}
             loggedIn={loggedIn}
+            onUpdateUser={handleUpdateUser}
+            onLogOut={handleLogOut}
           />
 
           <ProtectedRoute
@@ -136,7 +160,7 @@ function App() {
           </Route>
 
           <Route exact path="/signup">
-            <Register 
+            <Register
               onRegister={onRegister}
             />
           </Route>
