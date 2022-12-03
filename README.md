@@ -6,7 +6,7 @@
 https://simonmovie.nomoredomains.icu
 
 Ссылка на pull request:
-https://github.com/Simonssib/movies-explorer-frontend/pull/2
+https://github.com/Simonssib/movies-explorer-frontend/pull/3
 
 Figma maket: https://www.figma.com/file/lTKVAxilYW0hwhxQwKetQ8/Diploma-AlexeevSI?node-id=22300%3A1883&t=1uVURdNh3l609vmW-0
 
