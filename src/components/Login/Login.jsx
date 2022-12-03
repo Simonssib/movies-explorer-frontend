@@ -1,25 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 import "./login.css";
 import logo from '../../images/logo.png';
+import FormValidator from "../../utils/FormValidator";
 
 function Login({ onLogin }) {
-    const [email, setEmail] = useState('');
-
-    const [password, setPassword] = useState('');
-
-    function handleChangeEmail(e) {
-        setEmail(e.target.value)
-    }
-
-    function handleChangePassword(e) {
-        setPassword(e.target.value)
-    }
+    const checkInput = FormValidator();
+    const { email, password } = checkInput.errors;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onLogin({ email, password })
-            .catch(err => console.log(err));
+        const { email, password } = checkInput.values;
+        onLogin({ email, password });
+        checkInput.resetForm();
     };
 
     return (
@@ -32,12 +25,20 @@ function Login({ onLogin }) {
                     id="email"
                     name="email"
                     className="login__input"
-                    placeholder="Email"
-                    value={email}
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                     type="email"
-                    onChange={handleChangeEmail}
+                    minLength="2"
+                    maxLength="30"
+                    onChange={checkInput.handleChange}
+                    value={checkInput?.values?.email || ""}
                     required
                 />
+                <span className={`login__form-error ${
+                  !checkInput.isFormValid && "login__form-error_visible"
+                }`}>
+                    {email}
+                </span>
+
                 <p className="login__field">Пароль</p>
                 <input
                     id="password"
@@ -45,11 +46,15 @@ function Login({ onLogin }) {
                     className="login__input"
                     type="password"
                     required
-                    placeholder="Пароль"
-                    value={password}
-                    onChange={handleChangePassword}
+                    value={checkInput?.values?.password || ""}
+                    onChange={checkInput.handleChange}
                 />
-                <button className="login__btn" type="submit">
+                <span className={`login__form-error ${
+                  !checkInput.isFormValid && "login__form-error_visible"
+                }`}>
+                    {password}
+                </span>
+                <button className="login__btn" type="submit" disabled={!checkInput.isFormValid}>
                     Войти
                 </button>
                 <div className="login__register">

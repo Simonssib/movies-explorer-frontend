@@ -4,27 +4,60 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import './profile.css';
 
 function Profile({ onUpdateUser, onLogOut, loggedIn }) {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
     const currentUser = useContext(CurrentUserContext);
+
+    const [userInfo, setUserInfo] = useState({
+        name: {
+            value: "",
+            errorMessage: "",
+            isValid: true,
+        },
+        email: {
+            value: "",
+            errorMessage: "",
+            isValid: true,
+        }
+    });
+
+    const handleChangeInput = (e) => {
+        const { name, value, validity, validationMessage } = e.target;
+
+        setUserInfo((prevState) => ({
+            ...prevState,
+            [name]: {
+                ...userInfo[name],
+                value,
+                errorMessage: validationMessage,
+                isValid: validity.valid,
+            }
+        }));
+    }
+
+    const isValid = userInfo.name.isValid && userInfo.email.isValid;
 
     function handleSubmit(e) {
         e.preventDefault();
-        onUpdateUser({ name, email });
+        onUpdateUser({
+            name: userInfo.name.value,
+            email: userInfo.email.value
+        });
     }
 
     useEffect(() => {
-        setName(currentUser.name);
-        setEmail(currentUser.email);
+        setUserInfo({
+            name: {
+                value: currentUser.name,
+                errorMessage: "",
+                isValid: true,
+            },
+            email: {
+                value: currentUser.email,
+                errorMessage: "",
+                isValid: true,
+            }
+        });
     }, [currentUser, loggedIn]);
 
-    function handleNameChange(e) {
-        setName(e.target.value);
-    }
-
-    function handleEmailChange(e) {
-        setEmail(e.target.value);
-    }
 
     return (
         <section className='profile'>
@@ -41,10 +74,13 @@ function Profile({ onUpdateUser, onLogOut, loggedIn }) {
                         required
                         minLength="2"
                         maxLength="30"
-                        value={name || ""}
-                        onChange={handleNameChange}
+                        value={userInfo.name.value || ""}
+                        onChange={handleChangeInput}
                     />
                 </label>
+                <span className="profile__span-error">
+                    {userInfo.name.errorMessage}
+                </span>
                 <label className="profile__field">
                     <p className="profile__input-name">E-mail</p>
                     <input
@@ -54,12 +90,15 @@ function Profile({ onUpdateUser, onLogOut, loggedIn }) {
                         id="edit-email"
                         name="email"
                         required
-                        value={email || ""}
-                        onChange={handleEmailChange}
+                        value={userInfo.email.value || ""}
+                        onChange={handleChangeInput}
                     />
                 </label>
+                <span className="profile__span-error">
+                    {userInfo.email.errorMessage}
+                </span>
                 <nav className="profile__navigation">
-                    <button className='profile__edit' type="submit">
+                    <button className='profile__edit' type="submit" disabled={!isValid}>
                         Редактировать
                     </button>
                     <Link className="profile__logout" to="/" onClick={onLogOut}>

@@ -25,33 +25,34 @@
   }
 
   .checkbox__input+label {
-      display: inline-flex;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
   }
 
   .checkbox__input+label::before {
-      content: "";
-      display: inline-block;
-      flex-grow: 0;
-      flex-shrink: 0;
-      border-radius: 20px;
-      width: 36px;
-      height: 20px;
-      background-image: url(../../../images/checkbox.svg);
-      background-position: right;
-      background-size: 60% 80%;
-      background-repeat: no-repeat;
-      background-color: #3ddc84;
+    content: "";
+    display: inline-block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-radius: 20px;
+    width: 36px;
+    height: 20px;
+    background: #ebebeb;
+    background-image: url(../../../images/checkbox.svg);
+    background-position: left;
+    background-size: 60% 80%;
+    background-repeat: no-repeat;
   }
 
   .checkbox__input:checked+label::before {
-      border-radius: 20px;
-      background: #ebebeb;
-      background-image: url(../../../images/checkbox.svg);
-      background-position: left;
-      background-size: 60% 80%;
-      background-repeat: no-repeat;
+    border-radius: 20px;
+    background-image: url(../../../images/checkbox.svg);
+    background-position: right;
+    background-size: 60% 80%;
+    background-repeat: no-repeat;
+    background-color: #3ddc84;
   }
+
   ;
