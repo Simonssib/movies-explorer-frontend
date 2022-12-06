@@ -8,7 +8,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../utils/auth";
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
-import MoviesHeader from '../Header/MoviesHeader/MoviesHeader';
+import Header from '../Header/Header';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
@@ -97,7 +97,6 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         setCurrentUser(res.data);
-        history.push("/movies");
       })
       .catch((err) => console.log(err));
   };
@@ -326,7 +325,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page'>
         <Route exact path={headerEndpoints}>
-          <MoviesHeader
+          <Header
             isOpen={isBurgerPopupOpen}
             onOpen={handleOpenBurgerMenu}
             onClose={closePopup}

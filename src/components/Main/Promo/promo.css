@@ -111,15 +111,15 @@
 
 @media screen and (max-width: 768px) {
     .promo__container {
-      max-width: 768px;
-      align-items: center;
+        max-width: 768px;
+        align-items: center;
     }
 
     .promo__logo {
         margin: 18px 0 18px 30px;
     }
 
-    .promo__nav {        
+    .promo__nav {
         margin: 0 30px 0 0;
     }
 
@@ -149,26 +149,26 @@
     .promo__image {
         top: 214px;
         right: 50%;
-        transform:translate(50%, 0%); 
+        transform: translate(50%, 0%);
     }
-  }
+}
 
-  
+
 @media screen and (max-width: 320px) {
     .promo__container {
         height: 710px;
-      }
+    }
 
     .promo__logo {
         margin: 18px 0 18px 14px;
     }
 
-    .promo__nav {        
+    .promo__nav {
         margin: 0 14px 0 0;
         width: 132px;
     }
 
-        
+
     .promo__register {
         font-size: 10px;
     }
@@ -203,4 +203,4 @@
     .promo__link {
         margin: 80px 0 0 0;
     }
-  };
+}

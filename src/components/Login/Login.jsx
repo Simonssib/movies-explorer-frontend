@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-//import "./login.css";
 import FormValidator from "../../utils/FormValidator";
 
 function Login({ onLogin }) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Route, Switch } from 'react-router-dom';
-//import "./moviesHeader.css";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
+//import "../Header/Header.css";
+import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
 function MoviesHeader({ onOpen, isOpen, onClose, loggedIn }) {
     const loggedEndpoints = ["/movies", "/saved", "/me"];
@@ -9,7 +9,7 @@ function MoviesHeader({ onOpen, isOpen, onClose, loggedIn }) {
     return (
         <Switch>
             <Route exact path="/">
-                {!loggedIn ? (
+                {(!loggedIn) ? (
                     <header className="header-promo">
                         <div className='header'>
                             <Link to='/' className="header__logo" />

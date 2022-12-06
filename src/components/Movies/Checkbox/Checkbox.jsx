@@ -1,21 +1,24 @@
 import React from "react";
-//import './checkbox.css';
+import './Checkbox.css';
 
 function Checkbox({ onChangeCheckbox, checked }) {
     return (
-        <div className='checkbox checkbox__container'>
-            <input
-                type='checkbox'
-                className='checkbox-custom'
-                id="checkbox-custom"
-                name="checkbox-custom"
-                defaultValue="yes"
-                onChange={onChangeCheckbox}
-                checked={checked}
-            />
-            <label htmlFor='checkbox-custom'></label>
-            <p className='checkbox__title'>Короткометражки</p>
-        </div>
+        <label className="checkbox">
+            <div className="checkbox__container">
+                <input
+                    type='checkbox'
+                    className='checkbox__input'
+                    id="simon"
+                    name="checkbox-custom"
+                    defaultValue="yes"
+                    onChange={onChangeCheckbox}
+                    checked={checked}
+                />
+                <span className="checkbox__tumbler" />
+            </div>
+            <p className="checkbox__title">Короткометражки</p>
+        </label>
+
     );
 };
 
