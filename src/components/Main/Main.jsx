@@ -1,5 +1,5 @@
 import React from "react";
-import "./main.css";
+//import "./main.css";
 import AboutMe from "./AboutMe/AboutMe";
 import AboutProject from "./AboutProject/AboutProject";
 import Portfolio from "./Portfolio/Portfolio";
@@ -8,12 +8,14 @@ import Techs from "./Techs/Techs";
 
 function Main() {
     return (
-        <main className="main">
-            <Promo />
-            <AboutProject />
-            <Techs />
-            <AboutMe />
-            <Portfolio />
+        <main>
+            <section className="main-section">
+                <Promo />
+                <AboutProject />
+                <Techs />
+                <AboutMe />
+                <Portfolio />
+            </section>
         </main>
     )
 };

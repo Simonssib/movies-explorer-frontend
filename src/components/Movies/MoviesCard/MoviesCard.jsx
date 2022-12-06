@@ -1,5 +1,5 @@
 import React from 'react';
-import './moviesCard.css';
+//import './moviesCard.css';
 import { useLocation } from "react-router-dom";
 
 function MoviesCard({ movie, savedMovies, onSave, onDelete, }) {
@@ -18,7 +18,13 @@ function MoviesCard({ movie, savedMovies, onSave, onDelete, }) {
 
     const handleDeleteMovie = () => onDelete(movie);
 
-    const handleSaveMovie = () => onSave(movie);
+    const handleSaveMovie = () => {
+        if (isSaved) {
+            onDelete(savedMovies.filter((m) => m.movieId === movie.id)[0]);
+        } else {
+            onSave(movie);
+        }
+    };
 
     return (
         <section className="movie-card">
@@ -37,7 +43,7 @@ function MoviesCard({ movie, savedMovies, onSave, onDelete, }) {
                     src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image} />
             </a>
             <footer className="movie-card__footer">
-                {moviesPage ? (
+            {moviesPage ? (
                     <button
                         className={saveButtonClass}
                         type="button"

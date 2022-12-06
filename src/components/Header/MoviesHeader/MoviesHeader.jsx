@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Route, Switch } from 'react-router-dom';
-import "./moviesHeader.css";
+//import "./moviesHeader.css";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 function MoviesHeader({ onOpen, isOpen, onClose, loggedIn }) {

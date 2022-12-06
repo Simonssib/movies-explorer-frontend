@@ -1,5 +1,5 @@
 import React from "react";
-import "./savedMovies.css";
+//import "./savedMovies.css";
 
 import Preloader from "../Movies/Preloader/Preloader";
 import SearchForm from "../Movies/SearchForm/SearchForm";

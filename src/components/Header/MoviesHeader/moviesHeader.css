@@ -139,7 +139,7 @@
 }
 
 @media screen and (max-width: 768px) {
-   
+
     .header__open-burger {
         display: block;
     }

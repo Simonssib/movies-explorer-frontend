@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import { useLocation, Route } from "react-router-dom";
-import './moviesCardList.css';
+//import './moviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList({ onSave, onDelete, foundMovies, savedMovies }) {

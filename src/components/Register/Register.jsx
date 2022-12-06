@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import "./register.css";
+//import "./register.css";
 import logo from '../../images/logo.png';
 import FormValidator from "../../utils/FormValidator";
 
@@ -17,7 +17,7 @@ function Register({ onRegister }) {
 
     return (
         <section className='register'>
-            <img src={logo} alt="логотип" className="register__logo" />
+            <Link to='/' className="register__logo" />
             <form className="register__form" onSubmit={handleSubmit} noValidate>
                 <h1 className="register__title">Добро пожаловать!</h1>
                 <p className="register__field">Имя</p>

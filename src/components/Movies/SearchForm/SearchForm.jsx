@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import './searchForm.css';
+//import './searchForm.css';
 import Checkbox from '../Checkbox/Checkbox';
 
 function SearchForm({ onHandleSearch, onSubmitCheckbox }) {
@@ -27,13 +27,6 @@ function SearchForm({ onHandleSearch, onSubmitCheckbox }) {
         /* eslint-disable react-hooks/exhaustive-deps */
     }, [location]);
 
-    const handleSubmitSearch = (e) => {
-        e.preventDefault();
-        if (value) {
-            onHandleSearch(value, isChecked);
-        }
-    }
-
     function handleInputChange(e) {
         setValue(e.target.value);
         if (e.target.value.length === 0) {
@@ -49,6 +42,20 @@ function SearchForm({ onHandleSearch, onSubmitCheckbox }) {
             });
         }
     }
+
+    
+    const handleSubmitSearch = (e) => {
+        e.preventDefault();
+        if (!value) {
+            return setSearchFormState({
+                isFormValid: false,
+                errorText: "Нужно ввести ключевое слово"
+            });
+        }
+
+        onHandleSearch(value, isChecked);
+    }
+
 
     function handleChangeCheckboxStatus() {
         setIsChecked(!isChecked);

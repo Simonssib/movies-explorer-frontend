@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import './profile.css';
+//import './profile.css';
 
 function Profile({ onUpdateUser, onLogOut, loggedIn }) {
     const currentUser = useContext(CurrentUserContext);
@@ -19,6 +19,9 @@ function Profile({ onUpdateUser, onLogOut, loggedIn }) {
         }
     });
 
+    const isValid = userInfo.name.isValid && userInfo.email.isValid;
+    const isChanged = (userInfo.name.value !== currentUser.name) || (userInfo.email.value !== currentUser.email)
+
     const handleChangeInput = (e) => {
         const { name, value, validity, validationMessage } = e.target;
 
@@ -33,10 +36,9 @@ function Profile({ onUpdateUser, onLogOut, loggedIn }) {
         }));
     }
 
-    const isValid = userInfo.name.isValid && userInfo.email.isValid;
-
     function handleSubmit(e) {
         e.preventDefault();
+        console.log(isChanged);
         onUpdateUser({
             name: userInfo.name.value,
             email: userInfo.email.value
@@ -98,7 +100,7 @@ function Profile({ onUpdateUser, onLogOut, loggedIn }) {
                     {userInfo.email.errorMessage}
                 </span>
                 <nav className="profile__navigation">
-                    <button className='profile__edit' type="submit" disabled={!isValid}>
+                    <button className='profile__edit' type="submit" disabled={(!isValid || !isChanged)}>
                         Редактировать
                     </button>
                     <Link className="profile__logout" to="/" onClick={onLogOut}>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import "./login.css";
-import logo from '../../images/logo.png';
+//import "./login.css";
 import FormValidator from "../../utils/FormValidator";
 
 function Login({ onLogin }) {
@@ -17,7 +16,7 @@ function Login({ onLogin }) {
 
     return (
         <section className='login'>
-            <img src={logo} alt="логотип" className="login__logo" />
+            <Link to='/' className="login__logo" />
             <form className="login__form" onSubmit={handleSubmit}>
                 <h1 className="login__title">Рады видеть!</h1>
                 <p className="login__field">E-mail</p>

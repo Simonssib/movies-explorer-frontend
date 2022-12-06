@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import './promo.css';
+//import './promo.css';
 import promoImage from '../../../images/promoImage.svg';
 
 function Promo() {
