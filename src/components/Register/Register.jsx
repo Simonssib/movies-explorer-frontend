@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 //import "./register.css";
-import logo from '../../images/logo.png';
 import FormValidator from "../../utils/FormValidator";
 
 function Register({ onRegister }) {

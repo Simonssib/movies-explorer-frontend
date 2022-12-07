@@ -14,17 +14,17 @@ function BurgerMenu({ isOpen, onClose }) {
             onClick={onClose}
           />
           <nav className='burger-menu__link-wrapper'>
-            <Link to='/' className='burger-menu__link'>
+            <Link to='/' className='burger-menu__link' onClick={onClose}>
               Главная
             </Link>
-            <Link to='/movies' className='burger-menu__link'>
+            <Link to='/movies' className='burger-menu__link' onClick={onClose}>
               Фильмы
             </Link>
-            <Link to='/saved' className='burger-menu__link'>
+            <Link to='/saved' className='burger-menu__link' onClick={onClose}>
               Сохраненные фильмы
             </Link>
           </nav>
-          <Link to='/profile' className='burger-menu__account-container'>
+          <Link to='/me' className='burger-menu__account-container' onClick={onClose}>
             <p className="burger-menu__account">Аккаунт</p>
             <div className="burger-menu__account-icon" />
           </Link>
