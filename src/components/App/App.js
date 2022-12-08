@@ -98,7 +98,10 @@ function App() {
         setLoggedIn(true);
         setCurrentUser(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+            console.log(err);
+            handleLogOut();
+        });
   };
 
   const handleOpenBurgerMenu = () => {
@@ -254,12 +257,11 @@ function App() {
     setSearchedMovies(shortMovies);
   };
 
-
   const submitCheckboxSaved = (checkbox) => {
     if (checkbox) {
-      setSavedMovies(savedMovies.filter((item) => item.duration <= SHORT_MOVIE_DURATION));
+      setSavedMoviesList(savedMovies.filter((item) => item.duration <= SHORT_MOVIE_DURATION));
     } else if (!checkbox) {
-      setSavedMovies(savedMoviesList);
+      setSavedMoviesList(savedMovies);
     }
   };
 
@@ -296,14 +298,14 @@ function App() {
 
   const handleSearchSavedMovie = (req) => {
     setPreloader(true);
-    const searchMovies = savedMovies.filter((item) =>
+    const searchedMovies = savedMovies.filter((item) =>
       item.nameRU.toLowerCase().includes(req.toLowerCase()));
 
-    if (searchMovies.length === 0) {
+    if (searchedMovies.length === 0) {
       alert('По вашему запросу ничего не найдено');
       setPreloader(false);
     } else {
-      setSavedMovies(searchMovies);
+      setSavedMoviesList(searchedMovies);
       setPreloader(false);
     }
   };
@@ -359,7 +361,6 @@ function App() {
             }
           </Route>
 
-
           <ProtectedRoute
             exact
             path="/movies"
@@ -383,7 +384,7 @@ function App() {
             onHandleSearch={handleSearchSavedMovie}
             onSave={handleSaveMovie}
             onDelete={handleDeleteMovie}
-            savedMovies={savedMovies}
+            savedMovies={savedMoviesList}
             preloader={preloader}
             onSubmitCheckbox={submitCheckboxSaved}
           />
