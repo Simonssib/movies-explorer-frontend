@@ -48,11 +48,13 @@ function App() {
           setSavedMovies(movies.filter((film) => film.owner === me._id));
         })
         .catch((err) => console.log(err))
+        //.finally();
     }
   }, [loggedIn]);
 
   useEffect(() => {
     setSavedMoviesList(savedMovies);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -73,6 +75,8 @@ function App() {
   useEffect(() => {
     if (!localStorage.getItem("jwt")) {
       handleLogOut();
+      setIsTokenChecked(true);
+      console.log('Вышло, потому что токена нет')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -91,11 +95,14 @@ function App() {
           _id: res._id
         });
         setLoggedIn(true);
-        setIsTokenChecked(true);
       })
       .catch((err) => {
         console.log(err);
-        handleLogOut();
+        //handleLogOut();
+
+      })
+      .finally(() => {
+        setIsTokenChecked(true)
       });
   };
 
@@ -113,6 +120,7 @@ function App() {
       .then((res) => {
         setLoggedIn(true);
         localStorage.setItem("jwt", res.token);
+        setIsTokenChecked(true);
         history.push("/movies");
       })
       .catch((err) => {
@@ -137,12 +145,14 @@ function App() {
   };
 
   const handleLogOut = () => {
-    localStorage.clear();
     setLoggedIn(false);
     setCurrentUser({ name: "", email: "", _id: "" });
     setSearchedMovies([]);
     setMovies([]);
     setSavedMovies([]);
+    setSavedMoviesList([]);
+    setIsTokenChecked(false);
+    localStorage.clear();
   };
 
   const handleUpdateUser = ({ name, email }) => {
@@ -244,7 +254,7 @@ function App() {
   };
 
 
-  
+
   const submitCheckboxSaved = (checkbox) => {
     if (checkbox) {
       setSavedMoviesList(savedMovies.filter((item) => item.duration <= SHORT_MOVIE_DURATION));
@@ -286,26 +296,26 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-      
-const handleSearchSavedMovie = (req, checked) => {
-  setPreloader(true);
-  const resultArray = savedMovies.filter((item) =>
-    item.nameRU.toLowerCase().includes(req.toLowerCase()));
-  let shortMovies;
 
-  if (resultArray.length === 0) {
-    alert('По вашему запросу ничего не найдено');
-    setPreloader(false);
-  } else
-  if (checked) {
-    shortMovies = resultArray.filter((movie) => movie.duration <= SHORT_MOVIE_DURATION);
-    setSavedMoviesList(shortMovies);
-    setPreloader(false);
-  } else {
-    setSavedMoviesList(resultArray);
-    setPreloader(false);
-  }
-};
+  const handleSearchSavedMovie = (req, checked) => {
+    setPreloader(true);
+    const resultArray = savedMovies.filter((item) =>
+      item.nameRU.toLowerCase().includes(req.toLowerCase()));
+    let shortMovies;
+
+    if (resultArray.length === 0) {
+      alert('По вашему запросу ничего не найдено');
+      setPreloader(false);
+    } else
+      if (checked) {
+        shortMovies = resultArray.filter((movie) => movie.duration <= SHORT_MOVIE_DURATION);
+        setSavedMoviesList(shortMovies);
+        setPreloader(false);
+      } else {
+        setSavedMoviesList(resultArray);
+        setPreloader(false);
+      }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
