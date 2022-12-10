@@ -13,6 +13,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .promo__title {
@@ -147,7 +148,7 @@
     }
 
     .promo__image {
-        top: 214px;
+        top: 140px;
         right: 50%;
         transform: translate(50%, 0%);
     }

@@ -10,7 +10,8 @@ function Portfolio() {
                     <a
                         className="portfolio__navigation-link"
                         href="https://github.com/simonssib/how-to-learn"
-                        target="blanck"
+                        target="_blank"
+                        rel="noreferrer"
                     >
                         Статичный сайт
                         <span className="portfolio__navigation-arrow">&#8599;</span>
@@ -20,7 +21,8 @@ function Portfolio() {
                     <a
                         className="portfolio__navigation-link"
                         href="https://github.com/simonssib/russian-travel"
-                        target="blanck"
+                        target="_blank"
+                        rel="noreferrer"
                     >
                         Адаптивный сайт
                         <span className="portfolio__navigation-arrow">&#8599;</span>
@@ -30,7 +32,8 @@ function Portfolio() {
                     <a
                         className="portfolio__navigation-link"
                         href="https://github.com/simonssib/react-mesto-api-full"
-                        target="blanck"
+                        target="_blank"
+                        rel="noreferrer"
                     >
                         Одностраничное приложение
                         <span className="portfolio__navigation-arrow">&#8599;</span>

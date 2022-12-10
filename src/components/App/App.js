@@ -17,6 +17,7 @@ import Main from '../Main/Main';
 import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Preloader from '../Movies/Preloader/Preloader';
 const headerEndpoints = ["/", "/movies", "/saved", "/me"];
 const footerEndpoints = ["/", "/movies", "/saved"];
 const SHORT_MOVIE_DURATION = 40;
@@ -26,14 +27,12 @@ function App() {
   const [isBurgerPopupOpen, setIsBurgerPopupOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState([]);
-  const [errorMessage, setErrorMessage] = useState({
-    error: "",
-  });
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   const [preloader, setPreloader] = useState(false);
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -42,28 +41,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (loggedIn && currentUser) {
-      getSavedMovies();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn, currentUser]);
-
-  useEffect(() => {
     if (loggedIn) {
-      mainApi
-        .getUserInfo()
-        .then((res) => {
-          setCurrentUser({
-            name: res.name,
-            email: res.email,
-            _id: res._id
-          });
+      Promise.all([mainApi.getUserInfo(), mainApi.getSavedMovies()])
+        .then(([me, movies]) => {
+          setCurrentUser(me);
+          setSavedMovies(movies.filter((film) => film.owner === me._id));
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => console.log(err))
     }
   }, [loggedIn]);
+
+  useEffect(() => {
+    setSavedMoviesList(savedMovies);
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("searched-movies") && localStorage.getItem("checkbox-status")) {
@@ -74,9 +64,9 @@ function App() {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("loaded-movies"))) {
-      // if (localStorage.getItem("loaded-movies")) {
-      setMovies(JSON.parse(localStorage.getItem("loaded-movies")));
-      // }
+      if (localStorage.getItem("loaded-movies")) {
+        setMovies(JSON.parse(localStorage.getItem("loaded-movies")));
+      }
     }
   }, []);
 
@@ -95,13 +85,18 @@ function App() {
     auth
       .checkToken(token)
       .then((res) => {
+        setCurrentUser({
+          name: res.name,
+          email: res.email,
+          _id: res._id
+        });
         setLoggedIn(true);
-        setCurrentUser(res.data);
+        setIsTokenChecked(true);
       })
       .catch((err) => {
-            console.log(err);
-            handleLogOut();
-        });
+        console.log(err);
+        handleLogOut();
+      });
   };
 
   const handleOpenBurgerMenu = () => {
@@ -121,14 +116,10 @@ function App() {
         history.push("/movies");
       })
       .catch((err) => {
-        setErrorMessage({
-          error:
-            err.includes(401)
-              ? "Вы ввели неправильный логин или пароль"
-              : "При авторизации произошла ошибка",
-        });
-        alert(errorMessage.error);
-      })
+        err.includes(401)
+          ? alert("Вы ввели неправильный логин или пароль")
+          : alert("При авторизации произошла ошибка");
+      });
   };
 
   const onRegister = ({ name, email, password }) => {
@@ -139,14 +130,10 @@ function App() {
         onLogin({ email, password });
       })
       .catch((err) => {
-        setErrorMessage({
-          error:
-            err.includes(409)
-              ? "Вы ввели уже существующий email"
-              : "При регистрации произошла ошибка.",
-        });
-        alert(errorMessage.error);
-      })
+        err.includes(401)
+          ? alert("Вы ввели неправильный логин или пароль")
+          : alert("При авторизации произошла ошибка");
+      });
   };
 
   const handleLogOut = () => {
@@ -156,7 +143,6 @@ function App() {
     setSearchedMovies([]);
     setMovies([]);
     setSavedMovies([]);
-    history.push("/");
   };
 
   const handleUpdateUser = ({ name, email }) => {
@@ -257,13 +243,17 @@ function App() {
     setSearchedMovies(shortMovies);
   };
 
+
+  
   const submitCheckboxSaved = (checkbox) => {
     if (checkbox) {
       setSavedMoviesList(savedMovies.filter((item) => item.duration <= SHORT_MOVIE_DURATION));
     } else if (!checkbox) {
       setSavedMoviesList(savedMovies);
     }
+    localStorage.setItem("checkbox-status-saved", JSON.stringify(checkbox));
   };
+
 
   const handleSaveMovie = (movie) => {
     const isSaved = savedMovies.some(
@@ -276,7 +266,7 @@ function App() {
         .saveMovie(movie)
         .then((res) => {
           setSavedMovies(savedMovies.concat(res));
-          setSavedMoviesList(savedMoviesList.concat(res));
+          //setSavedMoviesList(savedMoviesList.concat(res));
         })
         .catch((err) => console.log(err));
     }
@@ -291,37 +281,31 @@ function App() {
       .then(() => {
         const updatedMoviesList = savedMovies.filter((item) => item._id !== savedMovie._id);
         setSavedMovies(updatedMoviesList);
-        setSavedMoviesList(savedMoviesList.filter((item) => item._id !== savedMovie._id));
+        //setSavedMoviesList(savedMoviesList.filter((item) => item._id !== savedMovie._id));
       })
       .catch((err) => console.log(err));
   };
 
-  const handleSearchSavedMovie = (req) => {
-    setPreloader(true);
-    const searchedMovies = savedMovies.filter((item) =>
-      item.nameRU.toLowerCase().includes(req.toLowerCase()));
+      
+const handleSearchSavedMovie = (req, checked) => {
+  setPreloader(true);
+  const resultArray = savedMovies.filter((item) =>
+    item.nameRU.toLowerCase().includes(req.toLowerCase()));
+  let shortMovies;
 
-    if (searchedMovies.length === 0) {
-      alert('По вашему запросу ничего не найдено');
-      setPreloader(false);
-    } else {
-      setSavedMoviesList(searchedMovies);
-      setPreloader(false);
-    }
-  };
-
-  const getSavedMovies = () => {
-    mainApi.getSavedMovies()
-      .then((res) => {
-        const savedMovies = res.filter((movie) => movie.owner === currentUser._id);
-        setSavedMovies(savedMovies);
-        setSavedMoviesList(savedMovies);
-      })
-      .catch((err) => {
-        console.log(`Ошибка ${err}`);
-      });
-  };
-
+  if (resultArray.length === 0) {
+    alert('По вашему запросу ничего не найдено');
+    setPreloader(false);
+  } else
+  if (checked) {
+    shortMovies = resultArray.filter((movie) => movie.duration <= SHORT_MOVIE_DURATION);
+    setSavedMoviesList(shortMovies);
+    setPreloader(false);
+  } else {
+    setSavedMoviesList(resultArray);
+    setPreloader(false);
+  }
+};
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -361,42 +345,58 @@ function App() {
             }
           </Route>
 
-          <ProtectedRoute
-            exact
-            path="/movies"
-            component={Movies}
-            movies={movies}
-            loggedIn={loggedIn}
-            onHandleSearch={handleSearchMovie}
-            foundMovies={searchedMovies}
-            onSave={handleSaveMovie}
-            onDelete={handleDeleteMovie}
-            savedMovies={savedMovies}
-            onSubmitCheckbox={submitCheckboxMovies}
-            preloader={preloader}
-          />
+          <Route exact path="/movies">
+            {isTokenChecked ? (
+              <ProtectedRoute
+                component={Movies}
+                movies={movies}
+                loggedIn={loggedIn}
+                onHandleSearch={handleSearchMovie}
+                foundMovies={searchedMovies}
+                onSave={handleSaveMovie}
+                onDelete={handleDeleteMovie}
+                savedMovies={savedMovies}
+                onSubmitCheckbox={submitCheckboxMovies}
+                preloader={preloader}
+              />
+            ) : (
+              <Preloader />
+            )
+            }
+          </Route>
 
-          <ProtectedRoute
-            exact
-            path="/saved"
-            component={SavedMovies}
-            loggedIn={loggedIn}
-            onHandleSearch={handleSearchSavedMovie}
-            onSave={handleSaveMovie}
-            onDelete={handleDeleteMovie}
-            savedMovies={savedMoviesList}
-            preloader={preloader}
-            onSubmitCheckbox={submitCheckboxSaved}
-          />
+          <Route exact path="/saved">
+            {isTokenChecked ? (
+              <ProtectedRoute
+                component={SavedMovies}
+                loggedIn={loggedIn}
+                onHandleSearch={handleSearchSavedMovie}
+                onSave={handleSaveMovie}
+                onDelete={handleDeleteMovie}
+                savedMovies={savedMovies}
+                foundMovies={savedMoviesList}
+                preloader={preloader}
+                onSubmitCheckbox={submitCheckboxSaved}
+              />
+            ) : (
+              <Preloader />
+            )
+            }
+          </Route>
 
-          <ProtectedRoute
-            exact
-            path="/me"
-            component={Profile}
-            loggedIn={loggedIn}
-            onUpdateUser={handleUpdateUser}
-            onLogOut={handleLogOut}
-          />
+          <Route exact path="/me">
+            {isTokenChecked ? (
+              <ProtectedRoute
+                component={Profile}
+                loggedIn={loggedIn}
+                onUpdateUser={handleUpdateUser}
+                onLogOut={handleLogOut}
+              />
+            ) : (
+              <Preloader />
+            )
+            }
+          </Route>
 
           <Route path="*">
             <PageNotFound />

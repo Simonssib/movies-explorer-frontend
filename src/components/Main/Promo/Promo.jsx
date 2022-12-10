@@ -10,8 +10,9 @@ function Promo() {
                 <h1 className='promo__title'>Учебный проект студента факультета Веб-разработки.</h1>
                 <p className='promo__subtitle'>Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
                 <Link className='promo__link' to="/movies">Узнать больше</Link>
+                <img className='promo__image' src={promoImage} alt='Логотип'/>
             </div>
-            <img className='promo__image' src={promoImage} alt='Логотип'/>
+            
         </section>
     )
 };

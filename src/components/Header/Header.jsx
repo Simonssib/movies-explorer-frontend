@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, NavLink, Route, Switch } from 'react-router-dom';
 //import "../Header/Header.css";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
@@ -24,8 +24,8 @@ function MoviesHeader({ onOpen, isOpen, onClose, loggedIn }) {
                         <div className='header'>
                             <Link to='/' className="header__logo" />
                             <nav className="header__nav">
-                                <Link to='/movies' className="header__link">Фильмы</Link>
-                                <Link to='/saved' className="header__link">Сохраненные фильмы</Link>
+                                <NavLink to='/movies' className="header__link">Фильмы</NavLink>
+                                <NavLink to='/saved' className="header__link">Сохраненные фильмы</NavLink>
                             </nav>
                             <Link to='/me' className="header__account-container">
                                 <p className="header__account">Аккаунт</p>
@@ -48,8 +48,8 @@ function MoviesHeader({ onOpen, isOpen, onClose, loggedIn }) {
                 <header className='header'>
                     <Link to='/' className="header__logo" />
                     <nav className="header__nav">
-                        <Link to='/movies' className="header__link">Фильмы</Link>
-                        <Link to='/saved' className="header__link">Сохраненные фильмы</Link>
+                        <NavLink to='/movies' className="header__link">Фильмы</NavLink>
+                        <NavLink to='/saved' className="header__link">Сохраненные фильмы</NavLink>
                     </nav>
                     <Link to='/me' className="header__account-container">
                         <p className="header__account">Аккаунт</p>

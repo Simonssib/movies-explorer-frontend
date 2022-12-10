@@ -11,6 +11,7 @@ function SavedMovies({
     onDelete,
     onSubmitCheckbox,
     savedMovies,
+    foundMovies,
     preloader
 }) {
     return (
@@ -23,7 +24,7 @@ function SavedMovies({
                 <Preloader />
             ) : (
                 <MoviesCardList
-                    foundMovies={savedMovies}
+                    foundMovies={foundMovies}
                     onSave={onSave}
                     onDelete={onDelete}
                     savedMovies={savedMovies}

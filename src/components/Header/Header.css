@@ -138,6 +138,10 @@
     background-color: rgba(243, 193, 248, 1);
 }
 
+.active {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 768px) {
 
     .header__open-burger {
